@@ -13,10 +13,9 @@ public class Book {
     private String title;
     private String status;
     private String author;
-    private double price;
-    private double category;
-    private double description;
-    private double cover_image;
-    private double total_pages;
-    private long created_at;
+    private String category;
+    private String description;
+    private String cover_image;
+    private Integer total_pages;
+    private String created_at;
 }
