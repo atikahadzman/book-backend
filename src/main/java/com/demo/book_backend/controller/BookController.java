@@ -17,7 +17,8 @@ import com.demo.book_backend.service.BookService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/bookstore")
+@RequestMapping("/api/books")
+
 public class BookController {
     private final BookService service;
 
