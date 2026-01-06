@@ -5,18 +5,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
-@Document(collection = "books")
+@Document(collection = "users")
 @Data
-public class Book {
+public class Users 
+{
     @Id
     private String id;
-    private String title;
+    private String name;
+    private String role;
+    private String email;
+    private String phone;
     private String status;
-    private String author;
-    private double price;
-    private double category;
-    private double description;
-    private double cover_image;
-    private double total_pages;
+    private String book_id;
     private long created_at;
 }
