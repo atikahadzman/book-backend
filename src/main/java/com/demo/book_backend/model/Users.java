@@ -19,4 +19,13 @@ public class Users
     private String book_id;
     private long created_at;
     private String password;
+    private String username;
+
+    public void setUsername(String username) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setPassword(String password) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
