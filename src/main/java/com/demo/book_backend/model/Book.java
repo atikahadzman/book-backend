@@ -18,4 +18,5 @@ public class Book {
     private String cover_image;
     private Integer total_pages;
     private String created_at;
+    private String book_url;
 }
