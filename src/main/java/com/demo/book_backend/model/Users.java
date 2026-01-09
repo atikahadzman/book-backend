@@ -18,4 +18,5 @@ public class Users
     private String status;
     private String book_id;
     private long created_at;
+    private String password;
 }
