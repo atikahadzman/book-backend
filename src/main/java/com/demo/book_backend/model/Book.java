@@ -2,11 +2,16 @@ package com.demo.book_backend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document(collection = "books")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
     @Id
     private String id;
@@ -15,8 +20,16 @@ public class Book {
     private String author;
     private String category;
     private String description;
-    private String cover_image;
-    private Integer total_pages;
-    private String created_at;
-    private String book_url;
+
+    @Field("cover_image")
+    private String coverImage;
+
+    @Field("total_pages")
+    private Integer totalPages;
+
+    @Field("created_at")
+    private String createdAt;
+
+    @Field("book_url")
+    private String bookUrl;
 }
