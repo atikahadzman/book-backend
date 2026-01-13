@@ -1,6 +1,8 @@
 package com.demo.book_backend.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -78,8 +80,10 @@ public class BookController {
 
     // DELETE
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable String id) {
+    public Map<String, String> delete(@PathVariable String id) {
         service.delete(id);
-        return "Book deleted successfully";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Book deleted successfully");
+        return response;
     }
 }
