@@ -2,7 +2,6 @@ package com.demo.book_backend.controller;
 
 import java.util.List;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,31 +10,51 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.book_backend.model.Book;
+import com.demo.book_backend.repository.BookRepository;
 import com.demo.book_backend.service.BookService;
+import com.demo.book_backend.service.FileStorageService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class BookController {
     private final BookService service;
+    private final BookRepository bookRepository;
+    private final FileStorageService fileStorageService;
 
-    public BookController(BookService service) {
-        this.service = service;
-    }
-
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Book create(
-        // @Valid @RequestPart("book") Book book,
-        @RequestPart("book") Book book,
-        @RequestPart(value = "file", required = false) MultipartFile file
+    public BookController(
+        BookService service,
+        BookRepository bookRepository,
+        FileStorageService fileStorageService
     ) {
-        return service.create(book, file);
+        this.service = service;
+        this.bookRepository = bookRepository;
+        this.fileStorageService = fileStorageService;
+    }
+    
+    @PostMapping(consumes = "multipart/form-data")
+    public Book createBook(
+            @RequestParam String title,
+            @RequestParam String author,
+            @RequestParam String description,
+            @RequestParam MultipartFile coverImage,
+            @RequestParam MultipartFile bookFile
+    ) throws Exception {
+        Book book = new Book();
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setDescription(description);
+
+        book.setCoverImage(fileStorageService.saveFile(coverImage, "images"));
+        book.setBookUrl(fileStorageService.saveFile(bookFile, "pdfs"));
+
+        return bookRepository.save(book);
     }
 
     // READ ALL
