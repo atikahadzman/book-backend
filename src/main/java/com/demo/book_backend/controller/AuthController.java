@@ -29,6 +29,8 @@ public class AuthController {
                 .map(user -> {
                     if (user.getPassword().equals(request.getPassword())) {
                         response.put("message", "Login successful!");
+                        response.put("id", user.getId());
+                        response.put("username", user.getUsername());
                         return ResponseEntity.ok(response);
                     } else {
                         response.put("message", "Invalid password");
